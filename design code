@@ -1,14 +1,14 @@
-module robin( input clk, reset, [3:0]reg, output reg [3:0]grant );
+module robin( input clk, reset, [3:0]req, output reg [3:0]grant);
 always @(posedge clk ) begin
   if ( reset ) 
-  grant <= reg[0];
+  grant <= 4'b0000;
   else
-  case ( reg ) begin
-  4'b0001: grant <= reg [0];
-  4'b0010: grant <= reg [1];
-  4'b0011: grant <= reg [2};
-  4'b0100: grant <= reg [3];
-  end 
+  casex ( req )
+  4'b0000: grant <=  4'b0000;
+  4'b0001: grant <=  4'b0001;
+  4'b001x: grant <=  4'b0010;
+  4'b01xx: grant <=  4'b0100;
+  4'b1xxx: grant <=  4'b1000;
   endcase
   end
   endmodule
